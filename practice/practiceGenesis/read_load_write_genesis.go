@@ -75,13 +75,13 @@ func makePurchase(genesis *Genesis, user string, amount int) bool {
 
 func main() {
 	// Ensure the database directory exists, otherwise create it
-	err := os.MkdirAll("../database", os.ModePerm)
+	err := os.MkdirAll("../../database", os.ModePerm)
 	if err != nil {
 		log.Fatal("Error creating directory:", err)
 	}
 
 	// Load the genesis data from the file or create new data if file is empty or doesn't exist
-	genesis, err := loadGenesis("../database/genesis_file.json")
+	genesis, err := loadGenesis("../../database/genesis_file.json")
 	if err != nil {
 		log.Fatal("Error loading genesis data:", err)
 	}
@@ -98,7 +98,7 @@ func main() {
 		}
 
 		// Save the new genesis data to the file
-		err = saveGenesis("../database/genesis_file.json", genesis)
+		err = saveGenesis("../../database/genesis_file.json", genesis)
 		if err != nil {
 			log.Fatal("Error saving genesis file:", err)
 		}
@@ -109,7 +109,7 @@ func main() {
 		genesis.Balances["user2"] = 10000
 
 		// Save the updated genesis data back to the file
-		err = saveGenesis("../database/genesis_file.json", genesis)
+		err = saveGenesis("../../database/genesis_file.json", genesis)
 		if err != nil {
 			log.Fatal("Error saving updated genesis file:", err)
 		}
