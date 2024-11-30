@@ -1,0 +1,8 @@
+{
+    "genesis_time": "2024-11-30T00:00:00Z",
+    "chain_id": "Harystylesdev",
+    "balances": {
+      "harystyles": 1000000,
+      "okeke": 500000
+    }
+}

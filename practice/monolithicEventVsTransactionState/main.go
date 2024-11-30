@@ -2,19 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	// Import the necessary packages
+	"blockchain-in-go/practice/monolithicEventVsTransactionState/state"
+	"blockchain-in-go/practice/monolithicEventVsTransactionState/transaction"
 )
 
 func main() {
-	// File paths for genesis and transaction files
-	// genesisFile := "../../database/genesis.json"
-	// stateFile := "../../database/state.json"
-
-	// Read the genesis file to get the initial state
-	state, err := NewStateFromDisk()
+	// Read the genesis file and create the initial state
+	state, err := state.NewStateFromDisk() // Use the NewStateFromDisk from the state package
 	if err != nil {
-		fmt.Printf("Error reading genesis file: %v\n", err)
-		return
+		log.Fatalf("Error reading state from disk: %v", err)
 	}
 
 	// Display initial state (from the genesis file)
@@ -24,23 +23,24 @@ func main() {
 	}
 
 	// Perform a transaction: Transfer tokens between two users
-	tx1 := Tx{
-		From:  "andrej",
-		To:    "babayaga",
-		Value: 2000,
-		Data:  "",
+	tx1 := transaction.Tx{ // Referencing the Tx struct from the transaction package
+		From:  "harystyles",
+		To:    "okeke",
+		Value: 150,
+		Data:  "laptop fee",
 	}
 
+	// Add the transaction to the state
 	err = state.Add(tx1)
 	if err != nil {
-		fmt.Printf("Error during transaction: %v\n", err)
+		log.Printf("Error during transaction: %v\n", err)
 		return
 	}
 
 	// Persist the new state and transactions
 	err = state.Persist()
 	if err != nil {
-		fmt.Printf("Error persisting state file: %v\n", err)
+		log.Printf("Error persisting state file: %v\n", err)
 		return
 	}
 
